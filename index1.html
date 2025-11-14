@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Prime Art Studio — Artes para Instagram</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #f6fbfb;
+      --card: #ffffff;
+      --primary: #0b5166;
+      --accent: #00c3ff;
+      --muted: #6b7280;
+      --glass: rgba(255,255,255,0.12);
+      --glass-2: rgba(255,255,255,0.22);
+      --shadow-sm: 0 6px 18px rgba(12,40,50,0.06);
+      --shadow-lg: 0 18px 40px rgba(12,40,50,0.10);
+      --radius: 14px;
+      --gap: 20px;
+      --transition: 280ms cubic-bezier(.2,.9,.2,1);
+    }
+
+    /* Reset + base */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,var(--bg),#eef9fa);
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+      color:#0f172a;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      -webkit-tap-highlight-color: transparent;
+    }
+    a{color:inherit;text-decoration:none}
+    img,video{display:block;max-width:100%}
+
+    /* Layout container */
+    .wrap{max-width:1200px;margin:32px auto;padding:0 20px}
+
+    /* HEADER */
+    header.app-header{
+      position:sticky;top:12px;z-index:220;
+      background:linear-gradient(90deg,#0b5166,#0f7b90);
+      padding:12px 18px;border-radius:12px;color:#fff;box-shadow:var(--shadow-lg);
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand svg{width:46px;height:46px;flex-shrink:0}
+    .brand .title{font-weight:700;font-family:Poppins,Inter;font-size:18px;letter-spacing:0.2px}
+    .nav{display:flex;gap:16px;align-items:center}
+    .nav a{color:rgba(255,255,255,0.95);font-weight:600;padding:8px 12px;border-radius:10px;transition:all var(--transition)}
+    .nav a:hover{background:rgba(255,255,255,0.06);color:#fff}
+    .actions{display:flex;gap:10px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:12px;font-weight:700;
+      transition:all var(--transition);cursor:pointer;border:0;
+      box-shadow:none;
+    }
+    .btn--primary{background:var(--accent);color:#022;box-shadow:0 8px 22px rgba(0,195,255,0.12)}
+    .btn--ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.12)}
+    .hamburger{display:none;background:transparent;border:0;color:#fff;font-size:22px;padding:6px}
+
+    /* HERO */
+    .hero{
+      margin-top:22px;
+      position:relative;
+      display:grid;
+      grid-template-columns: 1fr 440px;
+      gap:28px;
+      align-items:center;
+    }
+    .hero-left{
+      background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      border-radius:18px;padding:34px;box-shadow:var(--shadow-lg);backdrop-filter:blur(6px);
+      transition:transform var(--transition);
+      position:relative;z-index:6;overflow:hidden;
+    }
+    .kicker{display:inline-block;background:rgba(11,81,102,0.08);color:var(--primary);padding:8px 12px;border-radius:999px;font-weight:700;font-size:13px}
+    .hero-title{font-family:Poppins,Inter;font-size:34px;color:var(--primary);margin:14px 0 8px;line-height:1.05}
+    .hero-sub{color:var(--muted);margin-bottom:18px}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+    .hero-hero-features{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .feature{background:linear-gradient(180deg,#fff,#fbfeff);padding:10px 12px;border-radius:10px;border:1px solid rgba(12,40,50,0.04);font-weight:600;color:var(--primary);box-shadow:var(--shadow-sm)}
+
+    .hero-right{
+      position:relative;display:flex;align-items:center;justify-content:center;z-index:5
+    }
+    .hero-media-wrap{
+      width:100%;max-width:440px;border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg);
+      background:linear-gradient(180deg,#eaffff,#f5fcff);
+      transform:translateY(0);transition:transform 420ms cubic-bezier(.2,.9,.2,1);
+    }
+    .hero-media{width:100%;height:100%;object-fit:cover;display:block}
+
+    /* particles canvas */
+    #particles{position:absolute;inset:0;z-index:4;pointer-events:none}
+
+    /* SECTIONS */
+    section{margin-top:34px}
+    .section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+    .section-title{font-size:20px;color:var(--primary);font-weight:700}
+    .section-sub{color:var(--muted)}
+
+    /* SERVICES GRID */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .card{background:var(--card);border-radius:14px;padding:18px;border:1px solid rgba(12,40,50,0.04);box-shadow:var(--shadow-sm);transition:transform var(--transition),box-shadow var(--transition);will-change:transform;overflow:hidden}
+    .card:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(12,40,50,0.12)}
+    .card h3{margin:6px 0;color:var(--primary);font-size:16px}
+    .card p{color:var(--muted);margin:0}
+    .price{margin-top:12px;font-weight:800;color:var(--primary);font-size:18px}
+
+    /* PORTFOLIO */
+    .portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .work{border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fff,#fbffff);border:1px solid rgba(12,40,50,0.04);box-shadow:var(--shadow-sm);transition:transform var(--transition), box-shadow var(--transition), filter var(--transition);cursor:pointer;position:relative}
+    .work img{width:100%;height:220px;object-fit:cover;display:block;transition:transform 420ms cubic-bezier(.2,.9,.2,1)}
+    .work:hover{transform:translateY(-8px);box-shadow:0 30px 80px rgba(12,40,50,0.12)}
+    .work:hover img{transform:scale(1.04)}
+    .work-body{padding:12px}
+    .work-title{font-weight:700;color:var(--primary);margin-bottom:6px}
+    .work-desc{color:var(--muted);font-size:14px}
+
+    /* Testimonials (carousel-lite) */
+    .testimonials{display:flex;gap:12px;overflow:auto;padding-bottom:8px}
+    .testimonial{min-width:280px;background:linear-gradient(180deg,#fff,#fbffff);padding:16px;border-radius:12px;border:1px solid rgba(12,40,50,0.04);box-shadow:var(--shadow-sm)}
+    .testimonial p{color:var(--muted);margin:0 0 8px}
+    .author{font-weight:700;color:var(--primary)}
+
+    /* CONTACT */
+    .contact-grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+    .contact-panel{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(12,40,50,0.04);box-shadow:var(--shadow-sm)}
+    .input,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #e6eef0;margin-bottom:10px;font-size:14px}
+    .small{font-size:13px;color:var(--muted)}
+
+    /* STATS */
+    .stats{display:flex;gap:18px;align-items:stretch}
+    .stat{flex:1;background:linear-gradient(180deg,#fff,#fbffff);padding:18px;border-radius:12px;text-align:center;border:1px solid rgba(12,40,50,0.04);box-shadow:var(--shadow-sm)}
+    .stat h3{font-size:28px;margin:6px 0;color:var(--primary)}
+    .stat p{color:var(--muted);margin:0}
+
+    /* FOOTER */
+    footer{margin-top:34px;padding:28px;border-radius:12px;background:#eaf6f5;color:var(--muted)}
+    .footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
+
+    /* FLOAT CTA */
+    .cta-whatsapp{position:fixed;right:18px;bottom:18px;background:linear-gradient(180deg,var(--accent),#00a6d9);color:#022;border-radius:999px;padding:14px 16px;box-shadow:0 20px 50px rgba(0,195,255,0.14);display:flex;gap:10px;align-items:center;font-weight:800;z-index:999}
+    .cta-whatsapp svg{width:20px;height:20px}
+
+    /* MODAL */
+    #modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);align-items:center;justify-content:center;z-index:9999}
+    #modal img{max-width:92%;max-height:92%;border-radius:12px}
+    #modal .close{position:absolute;top:18px;right:24px;color:#fff;font-size:26px;cursor:pointer}
+
+    /* small screens */
+    @media (max-width:1024px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .portfolio-grid{grid-template-columns:repeat(2,1fr)}
+      .hero{grid-template-columns:1fr 360px}
+      .stats{flex-direction:column}
+    }
+    @media (max-width:740px){
+      .nav{display:none}
+      .hamburger{display:inline-block}
+      .hero{grid-template-columns:1fr}
+      .hero-right{order:-1}
+      .hero-media-wrap{max-width:100%;height:auto}
+      .portfolio-grid{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+      header.app-header{padding:10px}
+      .hero-left{padding:20px}
+      .hero-title{font-size:28px}
+    }
+
+    /* small visual touches */
+    .fade-up{opacity:0;transform:translateY(10px);transition:opacity 520ms ease, transform 520ms ease}
+    .fade-up.visible{opacity:1;transform:none}
+    .sr-only{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
+
+    /* carousel controls */
+    .carousel{position:relative;overflow:hidden;border-radius:12px}
+    .carousel-inner{display:flex;transition:transform 520ms cubic-bezier(.2,.9,.2,1)}
+    .carousel-slide{min-width:100%;flex-shrink:0}
+    .carousel-indicators{position:absolute;left:12px;bottom:12px;display:flex;gap:8px}
+    .dot{width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,0.6);border:2px solid rgba(0,0,0,0.06)}
+    .dot.active{background:#022}
+
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="app-header" role="banner">
+    <div class="brand">
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+        <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#0b5166"/><stop offset="1" stop-color="#0f7b90"/></linearGradient></defs>
+        <rect width="64" height="64" rx="12" fill="url(#g)"/>
+        <path d="M20 26c0-6 3-8 8-8s8 2 8 8v2h-16v-2z" fill="#fff" opacity=".95"/>
+        <path d="M18 30h28v12a8 8 0 0 1-8 8H26a8 8 0 0 1-8-8V30z" fill="#fff" opacity=".95"/>
+      </svg>
+      <div>
+        <div class="title">Prime Art Studio</div>
+        <div style="font-size:12px;color:#d1e7eb">Artes & Conteúdos para Instagram</div>
+      </div>
+    </div>
+
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+      <a href="#portfolio">Portfólio</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+    </nav>
+
+    <div class="actions">
+      <a class="btn btn--ghost" href="https://www.instagram.com/vitrineprime.store?igsh=ZHJuOXk0enpzcmN3" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn btn--primary" href="https://wa.me/5511999999999?text=Olá%20Prime%20Art%20Studio!" target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
+      <button class="hamburger" id="btnMenu" aria-label="Abrir menu">☰</button>
+    </div>
+  </header>
+
+  <main class="wrap" id="top">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+
+      <!-- Particles canvas (interactive background) -->
+      <canvas id="particles" aria-hidden></canvas>
+
+      <div class="hero-left fade-up" id="heroCard">
+        <div class="kicker">Estúdio de Artes Digitais</div>
+
+        <!-- Typing effect title -->
+        <h1 class="hero-title" id="hero-title"> <span id="typed"></span><span aria-hidden id="cursor">▌</span></h1>
+
+        <p class="hero-sub">Criação de artes profissionais para Instagram — posts, stories, banners e campanhas com identidade visual que converte.</p>
+
+        <div class="hero-cta">
+          <a class="btn btn--primary" href="#portfolio">Ver Portfólio</a>
+          <a class="btn btn--ghost" href="https://wa.me/5511999999999?text=Olá%20Prime%20Art%20Studio!%20Quero%20um%20orçamento" target="_blank">Fazer Pedido</a>
+        </div>
+
+        <div class="hero-hero-features" aria-hidden>
+          <div class="feature">Design Profissional</div>
+          <div class="feature">Entrega Rápida</div>
+          <div class="feature">Formatos Prontos</div>
+        </div>
+
+        <!-- Stats row inside hero -->
+        <div style="display:flex;gap:12px;margin-top:18px;align-items:center">
+          <div style="flex:1;display:flex;gap:8px;align-items:center">
+            <div style="width:56px;height:56px;border-radius:12px;background:linear-gradient(180deg,#fff,#f7fffe);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--primary);box-shadow:var(--shadow-sm)">+<span id="stat1">0</span></div>
+            <div style="font-size:13px;color:var(--muted)">Clientes satisfeitos</div>
+          </div>
+          <div style="flex:1;display:flex;gap:8px;align-items:center">
+            <div style="width:56px;height:56px;border-radius:12px;background:linear-gradient(180deg,#fff,#f7fffe);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--primary);box-shadow:var(--shadow-sm)"><span id="stat2">0</span></div>
+            <div style="font-size:13px;color:var(--muted)">Artes entregues</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="hero-right fade-up" style="--delay:120ms">
+        <div class="hero-media-wrap" id="heroMedia">
+
+          <!-- Carousel + video combined: slides can be image or video -->
+          <div class="carousel" id="mainCarousel" aria-label="Carrossel de destaque">
+            <div class="carousel-inner" id="carouselInner">
+              <div class="carousel-slide">
+                <img class="hero-media" src="https://i.postimg.cc/vmMdPKHR/gerenciamento-de-redessociais.jpg" alt="Campanha destaque — Prime Art Studio">
+              </div>
+              <div class="carousel-slide">
+                <!-- Example video slide: swap src to your mp4 (assets/loop.mp4) -->
+                <video class="hero-media" muted loop playsinline preload="metadata" poster="https://via.placeholder.com/800x500.png?text=Video+Preview">
+                  <source src="assets/loop.mp4" type="video/mp4">
+                  Seu navegador não suporta vídeo.
+                </video>
+              </div>
+              <div class="carousel-slide">
+                <img class="hero-media" src="https://i.postimg.cc/tRNMXg5J/1000239334.png" alt="Arte destaque 2">
+              </div>
+            </div>
+
+            <div class="carousel-indicators" id="carouselIndicators" aria-hidden>
+              <div class="dot active" data-index="0" aria-label="Slide 1"></div>
+              <div class="dot" data-index="1" aria-label="Slide 2"></div>
+              <div class="dot" data-index="2" aria-label="Slide 3"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="sobre" class="fade-up" aria-labelledby="sobre-title">
+      <div class="section-head">
+        <h2 class="section-title" id="sobre-title">Sobre o Prime Art Studio</h2>
+      </div>
+      <p class="section-sub">Fundado em 2025, ajudamos pequenos negócios e criadores a se destacarem no Instagram com artes profissionais, consistentes e otimizadas para engajamento. Trabalhamos desde artes avulsas até pacotes mensais completos.</p>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="servicos" class="fade-up" aria-labelledby="servicos-title">
+      <div class="section-head">
+        <h2 class="section-title" id="servicos-title">Serviços & Pacotes</h2>
+        <div class="section-sub">Pacotes transparentes e editáveis — ou personalizamos para sua necessidade.</div>
+      </div>
+
+      <div class="grid" style="margin-top:12px">
+        <div class="card">
+          <h3>Pacote Conteúdo Mensal</h3>
+          <p class="muted">12 posts + 12 stories + 3 artes para reels</p>
+          <div class="price">R$ 499 / mês</div>
+          <div style="margin-top:12px">
+            <a class="btn btn--primary" href="https://wa.me/5511999999999?text=Quero%20o%20pacote%20conteúdo%20mensal">Solicitar</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Identidade Visual</h3>
+          <p class="muted">Logo, paleta de cores, tipografia e templates prontos</p>
+          <div class="price">R$ 350 (único)</div>
+          <div style="margin-top:12px">
+            <a class="btn btn--primary" href="https://wa.me/5511999999999?text=Quero%20identidade%20visual">Solicitar</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Artes Avulsas</h3>
+          <p class="muted">Post único / Story / Banner promocional</p>
+          <div class="price">a partir de R$ 35</div>
+          <div style="margin-top:12px">
+            <a class="btn btn--primary" href="https://wa.me/5511999999999?text=Quero%20uma%20arte%20avulsa">Solicitar</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="fade-up" aria-labelledby="portfolio-title">
+      <div class="section-head">
+        <h2 class="section-title" id="portfolio-title">Portfólio</h2>
+        <div class="section-sub">Algumas artes entregues — clique para ampliar.</div>
+      </div>
+
+      <div class="portfolio-grid" style="margin-top:12px">
+        <div class="work" role="button" tabindex="0" onclick="openModal('https://i.postimg.cc/vmMdPKHR/gerenciamento-de-redessociais.jpg')">
+          <img src="https://i.postimg.cc/vmMdPKHR/gerenciamento-de-redessociais.jpg" alt="Gerenciamento de redes — Prime Art Studio" loading="lazy">
+          <div class="work-body">
+            <div class="work-title">Gerenciamento de Redes</div>
+            <div class="work-desc">Card criado para campanha de redes sociais — visual limpo com CTA claro.</div>
+          </div>
+        </div>
+
+        <div class="work" role="button" tabindex="0" onclick="openModal('https://i.postimg.cc/tRNMXg5J/1000239334.png')">
+          <img src="https://i.postimg.cc/tRNMXg5J/1000239334.png" alt="Arte destaque" loading="lazy">
+          <div class="work-body">
+            <div class="work-title">Arte destaque</div>
+            <div class="work-desc">Post promocional com composição visual e CTA otimizado.</div>
+          </div>
+        </div>
+
+        <div class="work" role="button" tabindex="0" onclick="openModal('https://via.placeholder.com/1200x900.png?text=Exemplo+3')">
+          <img src="https://via.placeholder.com/800x600.png?text=Arte+Exemplo+3" alt="Exemplo 3" loading="lazy">
+          <div class="work-body">
+            <div class="work-title">Arte exemplo 3</div>
+            <div class="work-desc">Design para conteúdo informativo e engajamento.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="fade-up" aria-labelledby="testimonials-title">
+      <div class="section-head">
+        <h2 class="section-title" id="testimonials-title">Depoimentos</h2>
+        <div class="section-sub">O que clientes dizem sobre nossas artes.</div>
+      </div>
+
+      <div class="testimonials" style="margin-top:12px">
+        <div class="testimonial">
+          <p>"As artes transformaram nosso feed — mais profissional e com aumento de engajamento. Recomendo!"</p>
+          <div class="author">— Loja Flores e Cia</div>
+        </div>
+        <div class="testimonial">
+          <p>"Entrega rápida e super alinhado com nossa identidade. Voltaria a contratar com certeza."</p>
+          <div class="author">— Café São Pedro</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS SECTION -->
+    <section class="fade-up" aria-labelledby="stats-title">
+      <div class="section-head">
+        <h2 class="section-title" id="stats-title">Nossos números</h2>
+        <div class="section-sub">Resultados que falam por si — crescimento e consistência.</div>
+      </div>
+
+      <div class="stats" style="margin-top:12px">
+        <div class="stat">
+          <h3><span data-target="148">0</span>+</h3>
+          <p>Clientes atendidos</p>
+        </div>
+        <div class="stat">
+          <h3><span data-target="1246">0</span>+</h3>
+          <p>Artes entregues</p>
+        </div>
+        <div class="stat">
+          <h3><span data-target="98">0</span>%</h3>
+          <p>Média de engajamento</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contato" class="fade-up" aria-labelledby="contato-title">
+      <div class="section-head">
+        <h2 class="section-title" id="contato-title">Contato</h2>
+      </div>
+
+      <div class="contact-grid" style="margin-top:12px">
+        <div class="contact-panel">
+          <p class="muted">Pronto para dar um upgrade no seu Instagram? Envie um Resumo do Projeto rápido ou fale direto no WhatsApp.</p>
+
+          <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+            <a class="btn btn--primary" href="https://wa.me/5511999999999?text=Olá%20Prime%20Art%20Studio!%20Quero%20um%20orçamento" target="_blank">WhatsApp</a>
+            <a class="btn btn--ghost" href="https://www.instagram.com/vitrineprime.store?igsh=ZHJuOXk0enpzcmN3" target="_blank">Instagram</a>
+          </div>
+
+          <hr style="margin:16px 0;border:none;border-top:1px solid rgba(12,40,50,0.04)">
+
+          <form action="mailto:contato@primeartstudio.com.br" method="post" enctype="text/plain">
+            <input class="input" name="name" placeholder="Seu nome" required>
+            <input class="input" name="email" type="email" placeholder="Seu email" required>
+            <textarea class="input" name="message" rows="4" placeholder="Me conte sobre o projeto"></textarea>
+            <div style="display:flex;gap:10px;align-items:center;margin-top:8px">
+              <button class="btn btn--primary" type="submit">Enviar por email</button>
+              <div class="small">ou envie no WhatsApp</div>
+            </div>
+          </form>
+        </div>
+
+        <div class="contact-panel">
+          <h3 style="margin-top:0;color:var(--primary)">Informações</h3>
+          <p class="muted"><strong>Atendimento:</strong> Seg–Sex 08:00–18:00</p>
+          <p class="muted"><strong>Email:</strong> contato@primeartstudio.com.br</p>
+          <p class="muted"><strong>Instagram:</strong> <a href="https://www.instagram.com/vitrineprime.store?igsh=ZHJuOXk0enpzcmN3" target="_blank">@vitrineprime.store</a></p>
+          <p class="muted">Envie um Resumo do Projeto ou peça um orçamento rápido pelo WhatsApp.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" role="dialog" aria-hidden="true">
+    <div class="close" onclick="closeModal()" aria-label="Fechar">✕</div>
+    <img id="modalImg" src="" alt="Visualização de arte">
+  </div>
+
+  <!-- Floating CTA WhatsApp -->
+  <a class="cta-whatsapp" href="https://wa.me/5511999999999?text=Olá%20Prime%20Art%20Studio!%20Quero%20um%20orçamento" target="_blank" rel="noopener" aria-label="Abrir WhatsApp">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.472-.148-.671.15-.198.297-.767.967-.941 1.165-.173.198-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.173.198-.298.298-.497.099-.198.05-.372-.025-.52-.075-.148-.671-1.612-.92-2.206-.242-.579-.487-.5-.671-.51l-.571-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487 0 0 .27.111.486.166.198.049.386.037.53-.025.173-.075 1.08-.397 1.232-.495.149-.099.297-.148.447-.074.149.074.97.453 1.136.536.166.083.278.124.318.19.04.066.04.372-.257.72-.297.347-1.042 1.07-2.362 1.45-1.32.377-2.345.297-3.212.18-.867-.12-2.481-1.013-3.57-2.255-1.095-1.24-1.75-2.736-1.898-3.223-.148-.486-.02-.676.11-.774.11-.083.298-.198.446-.298.149-.099.396-.248.595-.372z" fill="#022"/>
+    </svg>
+    <span>Quero orçamento</span>
+  </a>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap" style="text-align:left">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap">
+        <div style="max-width:420px">
+          <strong>Prime Art Studio</strong>
+          <div style="margin-top:6px;color:var(--muted)">Artes e conteúdos visuais para Instagram — design que converte.</div>
+        </div>
+
+        <div style="display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap">
+          <div>
+            <div style="font-weight:700;color:var(--primary)">Navegação</div>
+            <div style="margin-top:8px;color:var(--muted)"><a href="#portfolio">Portfólio</a><br><a href="#servicos">Serviços</a><br><a href="#contato">Contato</a></div>
+          </div>
+
+          <div>
+            <div style="font-weight:700;color:var(--primary)">Contatos</div>
+            <div style="margin-top:8px;color:var(--muted)">contato@primeartstudio.com.br<br>Seg–Sex 08:00–18:00</div>
+          </div>
+
+          <div>
+            <div style="font-weight:700;color:var(--primary)">Siga</div>
+            <div style="margin-top:8px;color:var(--muted)"><a href="https://www.instagram.com/vitrineprime.store?igsh=ZHJuOXk0enpzcmN3" target="_blank">Instagram</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:18px;border-top:1px solid rgba(12,40,50,0.04);padding-top:14px;color:var(--muted);text-align:center">© 2025 Prime Art Studio — Todos os direitos reservados</div>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal on scroll
+    const revealTargets = document.querySelectorAll('.fade-up');
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add('visible');
+      });
+    },{threshold:0.08});
+    revealTargets.forEach(t=>io.observe(t));
+
+    // Modal open/close
+    function openModal(src){
+      const modal = document.getElementById('modal');
+      const img = document.getElementById('modalImg');
+      img.src = src;
+      modal.style.display = 'flex';
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){
+      const modal = document.getElementById('modal');
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden','true');
+      document.getElementById('modalImg').src = '';
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+    document.getElementById('modal').addEventListener('click', (e)=>{ if(e.target.id==='modal') closeModal(); });
+
+    // Keyboard accessibility for cards
+    document.addEventListener('keyup', (e)=>{
+      if(e.key==='Enter' || e.key===' '){
+        const active = document.activeElement;
+        if(active && active.getAttribute('role')==='button'){
+          active.click();
+        }
+      }
+    });
+
+    // Mobile menu (simple)
+    const btnMenu = document.getElementById('btnMenu');
+    btnMenu && btnMenu.addEventListener('click', ()=>{
+      const nav = document.querySelector('.nav');
+      if(!nav) return;
+      if(getComputedStyle(nav).display === 'none'){
+        nav.style.display = 'flex';
+        nav.style.flexDirection = 'column';
+        nav.style.position = 'absolute';
+        nav.style.right = '18px';
+        nav.style.top = '64px';
+        nav.style.background = 'linear-gradient(180deg,#0b5166,#0f7b90)';
+        nav.style.padding = '12px';
+        nav.style.borderRadius = '12px';
+        nav.style.boxShadow = 'var(--shadow-lg)';
+      } else {
+        nav.style.display = 'none';
+      }
+    });
+    window.addEventListener('resize', ()=>{
+      const nav = document.querySelector('.nav');
+      if(window.innerWidth > 740 && nav){
+        nav.style.display = '';
+        nav.style.position = '';
+        nav.style.flexDirection = '';
+        nav.style.background = '';
+        nav.style.padding = '';
+        nav.style.borderRadius = '';
+        nav.style.boxShadow = '';
+      }
+    });
+
+    // Typing effect (simple)
+    (function(){
+      const phrases = [
+        'Bem-vindo ao Prime Art Studio!',
+        'Artes que conversam com seu público',
+        'Identidade visual impactante',
+        'Conteúdo pronto para converter'
+      ];
+      const el = document.getElementById('typed');
+      const cursor = document.getElementById('cursor');
+      let pi=0, ci=0, forward=true;
+      function tick(){
+        const phrase = phrases[pi];
+        if(forward){
+          el.textContent = phrase.slice(0, ci+1);
+          ci++;
+          if(ci===phrase.length){ forward=false; setTimeout(tick,1200); return; }
+        } else {
+          el.textContent = phrase.slice(0, ci-1);
+          ci--;
+          if(ci===0){ forward=true; pi=(pi+1)%phrases.length; setTimeout(tick,300); return; }
+        }
+        setTimeout(tick, forward?70:40);
+      }
+      tick();
+      // blink cursor
+      setInterval(()=>{ cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0'; },500);
+    })();
+
+    // Simple carousel (auto + indicators)
+    (function(){
+      const inner = document.getElementById('carouselInner');
+      const slides = Array.from(inner.children);
+      const dots = Array.from(document.querySelectorAll('.dot'));
+      let idx = 0;
+      function go(i){
+        idx = (i + slides.length) % slides.length;
+        inner.style.transform = `translateX(-${idx*100}%)`;
+        dots.forEach(d=>d.classList.remove('active'));
+        dots[idx].classList.add('active');
+        // play video if slide has video
+        slides.forEach((s,j)=>{
+          const v = s.querySelector('video');
+          if(v){ if(j===idx){ v.play().catch(()=>{}); } else { v.pause(); v.currentTime=0; } }
+        });
+      }
+      dots.forEach(d=>d.addEventListener('click', e=>go(Number(e.currentTarget.dataset.index))));
+      let timer = setInterval(()=>go(idx+1),4500);
+      // pause on hover
+      const carousel = document.getElementById('mainCarousel');
+      carousel.addEventListener('mouseenter', ()=>clearInterval(timer));
+      carousel.addEventListener('mouseleave', ()=>timer=setInterval(()=>go(idx+1),4500));
+      // init
+      go(0);
+    })();
+
+    // Simple particles (canvas) - lightweight and configurable
+    (function(){
+      const canvas = document.getElementById('particles');
+      const ctx = canvas.getContext('2d');
+      let w=0,h=0,dpr=1, particles=[];
+      function resize(){
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        w = canvas.width = Math.floor(canvas.clientWidth * dpr || window.innerWidth * dpr);
+        h = canvas.height = Math.floor(canvas.clientHeight * dpr || 600 * dpr);
+        ctx.scale(dpr,dpr);
+      }
+      function rand(min,max){ return Math.random()*(max-min)+min }
+      function init(){
+        const bounds = document.querySelector('.hero')?.getBoundingClientRect();
+        canvas.style.height = (bounds? bounds.height + 'px' : '420px');
+        resize();
+        particles = Array.from({length: Math.round((canvas.width/canvas.height)*18)}, ()=>({
+          x: rand(0,w/dpr), y: rand(0,h/dpr), r: rand(0.6,2.4), vx: rand(-0.15,0.15), vy: rand(-0.05,0.05), alpha: rand(0.08,0.25)
+        }));
+      }
+      function step(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        particles.forEach(p=>{
+          p.x += p.vx; p.y += p.vy;
+          if(p.x < -10) p.x = w/dpr + 10; if(p.x > w/dpr + 10) p.x = -10;
+          if(p.y < -10) p.y = h/dpr + 10; if(p.y > h/dpr + 10) p.y = -10;
+          ctx.beginPath();
+          ctx.fillStyle = `rgba(11,81,102,${p.alpha})`;
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+          ctx.fill();
+        });
+        requestAnimationFrame(step);
+      }
+      window.addEventListener('resize', ()=>{ init(); });
+      init(); step();
+      // parallax on mouse
+      document.querySelector('.hero')?.addEventListener('mousemove', (e)=>{
+        const rect = e.currentTarget.getBoundingClientRect();
+        const cx = (e.clientX - rect.left) / rect.width - 0.5;
+        particles.forEach((p,i)=>{ p.x += cx * (i%3===0?0.3:0.08); });
+      });
+    })();
+
+    // Stats counters (in hero small) + stats section counters
+    (function(){
+      // hero counters
+      function animateValue(el, start, end, duration){
+        let startTime=null;
+        function step(ts){
+          if(!startTime) startTime=ts;
+          const progress = Math.min((ts-startTime)/duration,1);
+          el.textContent = Math.floor(progress*(end-start)+start);
+          if(progress<1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+      const h1 = document.getElementById('stat1');
+      const h2 = document.getElementById('stat2');
+      const heroObserver = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){ animateValue(h1,0,148,1200); animateValue(h2,0,1246,1200); heroObserver.disconnect(); }
+        });
+      },{threshold:0.2});
+      heroObserver.observe(document.getElementById('heroCard'));
+
+      // stats section
+      const statEls = document.querySelectorAll('.stat span[data-target], .stat span');
+      const statsObserver = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+          if(entry.isIntersecting){
+            const spans = entry.target.querySelectorAll('span[data-target]');
+            spans.forEach(s=>{
+              const to = Number(s.dataset.target || s.textContent);
+              animateValue(s, 0, to, 1400);
+            });
+            statsObserver.unobserve(entry.target);
+          }
+        });
+      },{threshold:0.2});
+      document.querySelectorAll('.stats .stat').forEach(s=>statsObserver.observe(s));
+    })();
+
+  </script>
+
+</body>
+</html>
